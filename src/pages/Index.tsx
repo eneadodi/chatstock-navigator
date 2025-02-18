@@ -201,6 +201,15 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      {/* Sidebar Backdrop for Mobile */}
+      {isMobile && isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/50 z-40"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
+      {/* Mobile Navigation */}
       {isMobile && (
         <nav className="fixed top-0 left-0 right-0 h-16 bg-zinc-800 border-b border-zinc-700 flex items-center justify-between px-4 z-40">
           <button 
@@ -219,16 +228,35 @@ const Index = () => {
         </nav>
       )}
       
-      {(!isMobile || isSidebarOpen) && (
+      {/* Sidebar */}
+      <div className={`fixed inset-y-0 left-0 ${isMobile ? 'top-0' : ''} transition-transform duration-300 ease-in-out z-50
+        ${isMobile ? (isSidebarOpen ? 'translate-x 0' : '-translate-x-full') : (isCollapsed ? 'w-20' : 'w-64')}`}
+      >
         <Sidebar 
           isCollapsed={isMobile ? false : isCollapsed} 
           setIsCollapsed={isMobile ? setIsSidebarOpen : setIsCollapsed}
           isMobile={isMobile}
         />
+      </div>
+
+      {/* Desktop Sidebar Toggle Button */}
+      {!isMobile && (
+        <button 
+          onClick={() => setIsCollapsed(!isCollapsed)}
+          className={`fixed top-1/2 z-50 bg-zinc-800 border border-zinc-700 rounded-full p-1 shadow-sm transition-all duration-300
+            ${isCollapsed ? 'left-16' : 'left-60'}`}
+        >
+          {isCollapsed ? (
+            <ChevronRight size={16} className="text-primary" />
+          ) : (
+            <ChevronLeft size={16} className="text-primary" />
+          )}
+        </button>
       )}
       
-      <main className={`flex-1 p-8 ${isMobile ? 'mt-16' : ''} ${isMobile ? 'w-full' : isCollapsed ? 'ml-20' : 'ml-64'} transition-all duration-300`}>
-        <div className="max-w-4xl mx-auto">
+      {/* Main Content */}
+      <main className={`w-full min-h-screen ${isMobile ? 'pt-16' : ''}`}>
+        <div className="max-w-4xl mx-auto p-8">
           <h1 className="text-4xl font-bold text-text-header mb-8 text-center">Let's Research Stocks Together</h1>
           
           {/* Chat Input */}
