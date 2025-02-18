@@ -256,48 +256,50 @@ const Index = () => {
       )}
       
       {/* Main Content */}
-      <main className={`w-full min-h-screen ${isMobile ? 'pt-16' : ''}`}>
-        <div className="max-w-4xl mx-auto p-8">
-          <h1 className="text-4xl font-bold text-text-header mb-8 text-center">Let's Research Stocks Together</h1>
-          
-          {/* Chat Input */}
-          <div className="mb-8">
-            <div className="relative">
-              <input
-                type="text"
-                value={inputValue}
-                onChange={(e) => setInputValue(e.target.value)}
-                placeholder="Ask me anything about stocks..."
-                className="w-full px-4 py-3 rounded-lg border border-zinc-700 bg-zinc-800 text-zinc-100 focus:ring-2 focus:ring-primary focus:border-transparent pr-12 placeholder:text-zinc-500"
-              />
-              <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary hover:text-primary/80">
-                <Send size={20} />
-              </button>
+      <main className={`w-full min-h-screen ${isMobile ? 'pt-16' : ''} flex items-center justify-center`}>
+        <div className="max-w-4xl w-full p-8">
+          <div className="space-y-12">
+            <h1 className="text-4xl font-bold text-text-header text-center">Let's Research Stocks Together</h1>
+            
+            {/* Chat Input */}
+            <div>
+              <div className="relative">
+                <input
+                  type="text"
+                  value={inputValue}
+                  onChange={(e) => setInputValue(e.target.value)}
+                  placeholder="Ask me anything about stocks..."
+                  className="w-full px-4 py-3 rounded-lg border border-zinc-700 bg-zinc-800 text-zinc-100 focus:ring-2 focus:ring-primary focus:border-transparent pr-12 placeholder:text-zinc-500"
+                />
+                <button className="absolute right-2 top-1/2 transform -translate-y-1/2 text-primary hover:text-primary/80">
+                  <Send size={20} />
+                </button>
+              </div>
             </div>
-          </div>
 
-          {/* Quick Actions */}
-          <div className="flex flex-wrap gap-4 mb-12 justify-center">
-            {["Rank My Stocks", "Rate My Stocks", "Learn About Key Metrics", "Discover Stocks"].map((text) => (
-              <button
-                key={text}
-                className="px-6 py-2 bg-zinc-800 text-zinc-300 rounded-full border border-zinc-700 hover:bg-zinc-700 hover:border-zinc-600 transition-colors"
-              >
-                {text}
-              </button>
-            ))}
-          </div>
-
-          {/* Voting Timer */}
-          <VotingTimer />
-
-          {/* Stock Cards */}
-          <div>
-            <h2 className="text-2xl font-semibold text-zinc-200 mb-6">This Week's Stocks</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {stocks.map((stock) => (
-                <StockCard key={stock.symbol} {...stock} />
+            {/* Quick Actions */}
+            <div className="flex flex-wrap gap-4 justify-center">
+              {["Rank My Stocks", "Rate My Stocks", "Learn About Key Metrics", "Discover Stocks"].map((text) => (
+                <button
+                  key={text}
+                  className="px-6 py-2 bg-zinc-800 text-zinc-300 rounded-full border border-zinc-700 hover:bg-zinc-700 hover:border-zinc-600 transition-colors"
+                >
+                  {text}
+                </button>
               ))}
+            </div>
+
+            {/* Voting Timer */}
+            <VotingTimer />
+
+            {/* Stock Cards */}
+            <div>
+              <h2 className="text-2xl font-semibold text-zinc-200 mb-6">This Week's Stocks</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {stocks.map((stock) => (
+                  <StockCard key={stock.symbol} {...stock} />
+                ))}
+              </div>
             </div>
           </div>
         </div>
